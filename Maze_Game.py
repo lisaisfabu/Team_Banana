@@ -94,8 +94,7 @@ class App:
             keys = pygame.key.get_pressed()
  
             if (keys[K_RIGHT]):
-                if(self.maze != 0):
-                    self.player.moveRight()
+                self.player.moveRight()
  
             if (keys[K_LEFT]):
                 self.player.moveLeft()
