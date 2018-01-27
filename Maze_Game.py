@@ -20,22 +20,18 @@ class Player:
  
 class Maze:
     def __init__(self):
-       self.M = 14
-       self.N = 14
-       self.maze = [ 1,1,1,1,1,1,1,1,1,1,1,1,1,1,
-                     1,0,0,0,0,0,0,0,0,0,1,1,0,1,
-                     1,0,1,1,1,0,1,1,1,0,1,0,0,1,
-                     1,0,1,0,0,0,0,0,0,0,0,0,1,1,
-                     1,0,1,0,1,1,1,1,0,0,1,0,0,1,
-                     1,0,0,0,0,0,0,0,0,1,1,0,1,1,
-                     1,0,1,1,1,0,1,1,0,0,1,1,1,1,
-                     1,0,0,0,0,0,1,1,1,0,0,0,0,1,
-                     1,0,0,1,1,0,0,1,1,0,1,0,0,1,
-                     1,1,0,1,1,1,0,0,1,0,1,0,1,1,
-                     1,0,0,0,0,0,0,0,0,0,1,0,0,1,
-                     1,0,1,0,1,1,1,1,0,1,1,0,1,1,
-                     1,0,0,0,0,1,1,0,0,1,0,0,0,0,
-                     1,1,1,1,1,1,1,0,1,1,1,1,1,1,]
+       self.M = 10
+       self.N = 10
+       self.maze = [ 1,1,1,1,1,1,1,1,1,1,
+                     1,0,0,0,0,0,0,0,0,1,
+                     1,0,1,1,1,0,1,1,1,1,
+                     1,0,1,0,0,0,0,0,0,1,
+                     1,0,1,0,1,1,1,1,0,1,
+                     1,0,0,0,0,0,0,0,0,1,
+                     1,0,1,1,1,0,1,1,0,1,
+                     1,0,0,0,0,0,1,1,1,1,
+                     1,0,0,1,1,0,0,0,0,1,
+                     1,1,1,1,1,1,1,1,1,1,]
  
     def draw(self,display_surf,image_surf):
        bx = 0
@@ -52,8 +48,8 @@ class Maze:
  
 class App:
  
-    windowWidth = 800
-    windowHeight = 800
+    windowWidth = 570
+    windowHeight = 570
     player = 0
  
     def __init__(self):
@@ -71,7 +67,7 @@ class App:
         pygame.display.set_caption('Pygame pythonspot.com example')
         self._running = True
         self._image_surf = pygame.image.load("person.png").convert()
-        self._block_surf = pygame.image.load("grass2.png").convert()
+        self._block_surf = pygame.image.load("grassF.png").convert()
  
     def on_event(self, event):
         if event.type == QUIT:
@@ -81,7 +77,7 @@ class App:
         pass
  
     def on_render(self):
-        self._display_surf.fill((213,244,224))
+        self._display_surf.fill((255,255,255))
         self._display_surf.blit(self._image_surf,(self.player.x,self.player.y))
         self.maze.draw(self._display_surf, self._block_surf)
         pygame.display.flip()
@@ -98,7 +94,8 @@ class App:
             keys = pygame.key.get_pressed()
  
             if (keys[K_RIGHT]):
-                self.player.moveRight()
+                if(self.maze != 0):
+                    self.player.moveRight()
  
             if (keys[K_LEFT]):
                 self.player.moveLeft()
