@@ -2,9 +2,9 @@ from pygame.locals import *
 import pygame
  
 class Player:
-    x = 73
-    y = 73
-    speed = .5
+    x = 57
+    y = 57
+    speed = 57
  
     def moveRight(self):
         self.x = self.x + self.speed
@@ -20,18 +20,22 @@ class Player:
  
 class Maze:
     def __init__(self):
-       self.M = 10
-       self.N = 10
-       self.maze = [ 1,1,1,1,1,1,1,1,1,1,
-                     1,0,0,0,0,0,0,0,0,1,
-                     1,0,1,1,1,0,1,1,1,1,
-                     1,0,1,0,0,0,0,0,0,1,
-                     1,0,1,0,1,1,1,1,0,1,
-                     1,0,0,0,0,0,0,0,0,1,
-                     1,0,1,1,1,0,1,1,0,1,
-                     1,0,0,0,0,0,1,1,1,1,
-                     1,0,0,1,1,0,0,0,0,1,
-                     1,1,1,1,1,1,1,1,1,1,]
+       self.M = 14
+       self.N = 14
+       self.maze = [ 1,1,1,1,1,1,1,1,1,1,1,1,1,1,
+                     1,0,0,0,0,0,0,0,0,0,1,1,0,1,
+                     1,0,1,1,1,0,1,1,1,0,1,0,0,1,
+                     1,0,1,0,0,0,0,0,0,0,0,0,1,1,
+                     1,0,1,0,0,0,0,0,0,0,1,0,0,1,
+                     1,0,0,0,0,0,0,0,0,1,1,0,1,1,
+                     1,0,1,1,1,0,1,1,0,0,1,1,1,1,
+                     1,0,0,0,0,0,1,1,1,0,0,0,0,1,
+                     1,0,0,1,1,0,0,1,1,0,1,0,0,1,
+                     1,1,0,1,1,1,0,0,1,0,1,0,1,1,
+                     1,0,0,0,0,0,0,0,0,0,1,0,0,1,
+                     1,0,1,0,1,1,1,1,0,1,1,0,1,1,
+                     1,0,0,0,0,1,1,0,0,1,0,0,0,0,
+                     1,1,1,1,1,1,1,0,1,1,1,1,1,1,]
  
     def draw(self,display_surf,image_surf):
        bx = 0
@@ -48,8 +52,8 @@ class Maze:
  
 class App:
  
-    windowWidth = 570
-    windowHeight = 570
+    windowWidth = 800
+    windowHeight = 800
     player = 0
  
     def __init__(self):
@@ -77,7 +81,7 @@ class App:
         pass
  
     def on_render(self):
-        self._display_surf.fill((255,255,255))
+        self._display_surf.fill((213,244,224))
         self._display_surf.blit(self._image_surf,(self.player.x,self.player.y))
         self.maze.draw(self._display_surf, self._block_surf)
         pygame.display.flip()
@@ -89,13 +93,13 @@ class App:
         if self.on_init() == False:
             self._running = False
  
-        while( self._running ):
+        # while( self._running ):
+            '''
             pygame.event.pump()
             keys = pygame.key.get_pressed()
  
             if (keys[K_RIGHT]):
-                if(self.maze != 0):
-                    self.player.moveRight()
+                self.player.moveRight()
  
             if (keys[K_LEFT]):
                 self.player.moveLeft()
@@ -105,10 +109,26 @@ class App:
  
             if (keys[K_DOWN]):
                 self.player.moveDown()
- 
-            if (keys[K_ESCAPE]):
+
+            if (keys[QUIT]):
                 self._running = False
  
+            if (keys[K_ESCAPE]):
+                self._running = False'''
+        while (self._running):
+            for event in pygame.event.get():
+                if event.type == KEYDOWN:
+                    if event.key == K_DOWN:
+                        self.player.moveDown()
+                    if event.key == K_UP:
+                        self.player.moveUp()
+                    if event.key == K_LEFT:
+                        self.player.moveLeft()
+                    if event.key == K_RIGHT:
+                        self.player.moveRight()
+                    if event.key == K_ESCAPE:
+                        self._running = False
+     
             self.on_loop()
             self.on_render()
         self.on_cleanup()
