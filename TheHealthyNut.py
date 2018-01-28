@@ -4,7 +4,8 @@ import pygame
 def welcome():
     pygame.init()
     screen = pygame.display.set_mode((684, 684))
-    
+
+    #welcome page
     # Fill background
     screen.fill((250, 250, 250))
     
@@ -13,8 +14,8 @@ def welcome():
     text = font.render("TheHealthyNut", 1, (10, 10, 10))
     textpos = text.get_rect()
     textpos.centerx = screen.get_rect().centerx
-    
 
+    #welcome screen controls
     while True:
         for event in pygame.event.get():
             if event.type == QUIT:
@@ -24,6 +25,7 @@ def welcome():
                     pygame.quit()
                 if event.key == K_SPACE:
                     return
+        #blinking image using timer
         image = pygame.image.load("healthynut.png")
         screen.blit(image,(0,0))
         pygame.time.delay(200)
@@ -33,6 +35,7 @@ def welcome():
         pygame.display.flip()
         pygame.display.update()
 
+#the player that you move around
 class Player:
     x = 57
     y = 57
@@ -49,14 +52,16 @@ class Player:
  
     def moveDown(self):
         self.y = self.y + self.speed
- 
+
+#the actual maze
 class Maze:
 
+    #size of array 12 by 12
     def __init__(self):
        self.M = 12
        self.N = 12
        
-       
+       #one dimensional array maze
        self.maze = [ 1,1,1,1,1,1,1,1,1,1,1,1,
                      1,0,0,0,0,0,0,0,0,0,3,1,
                      1,5,1,1,2,0,1,1,1,0,0,1,
@@ -69,7 +74,8 @@ class Maze:
                      1,1,0,0,0,1,0,0,1,0,1,1,
                      1,0,0,9,0,0,5,0,0,0,0,1,
                      12,0,1,1,1,1,1,1,1,1,0,12,]
- 
+
+     #draws the maze and items in the maze
     def draw(self,display_surf):
        bx = 0
        by = 0
@@ -129,13 +135,13 @@ class Maze:
                bx = 0 
                by = by + 1
  
- 
+#the application
 class App:
  
     windowWidth = 684
     windowHeight = 684
     player = 0
- 
+
     def __init__(self):
         self._running = True
         self._display_surf = None
@@ -198,7 +204,7 @@ class App:
             self.on_loop()
             self.on_render()
         self.on_cleanup()
- 
+
 if __name__ == "__main__" :
     welcome()
     theApp = App()
