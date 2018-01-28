@@ -13,8 +13,7 @@ def welcome():
     text = font.render("TheHealthyNut", 1, (10, 10, 10))
     textpos = text.get_rect()
     textpos.centerx = screen.get_rect().centerx
-    image = pygame.image.load("healthynut.png")
-    screen.blit(image,(0,0))
+    
 
     while True:
         for event in pygame.event.get():
@@ -25,6 +24,13 @@ def welcome():
                     pygame.quit()
                 if event.key == K_SPACE:
                     return
+        image = pygame.image.load("healthynut.png")
+        screen.blit(image,(0,0))
+        pygame.time.delay(200)
+        pygame.display.flip()
+        image = pygame.image.load("healthynut1.png")
+        screen.blit(image,(0,0))
+        pygame.display.flip()
         pygame.display.update()
 
 class Player:
