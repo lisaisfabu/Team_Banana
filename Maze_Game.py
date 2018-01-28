@@ -20,8 +20,10 @@ class Player:
  
 class Maze:
     def __init__(self):
-       self.M = 14
-       self.N = 14
+       self.M = 12
+       self.N = 12
+       
+       '''
        self.maze = [ 1,1,1,1,1,1,1,1,1,1,1,1,1,1,
                      1,0,0,0,0,0,0,0,0,0,1,1,0,1,
                      1,0,1,1,1,0,1,1,1,0,1,0,0,1,
@@ -36,6 +38,19 @@ class Maze:
                      1,0,1,0,1,1,1,1,0,1,1,0,1,1,
                      1,0,0,0,0,1,1,0,0,1,0,0,0,0,
                      1,1,1,1,1,1,1,0,1,1,1,1,1,1,]
+                     '''
+       self.maze = [ 1,1,1,1,1,1,1,1,1,1,1,1,
+                     1,0,0,0,0,0,0,0,0,0,1,1,
+                     1,0,1,1,1,0,1,1,1,0,1,1,
+                     1,0,1,0,0,0,0,0,0,0,0,1,
+                     1,0,1,0,0,0,0,0,0,0,1,1,
+                     1,0,0,0,0,0,0,0,0,1,1,1,
+                     1,0,1,1,1,0,1,1,0,0,1,1,
+                     1,0,0,0,0,0,1,1,1,0,0,1,
+                     1,0,0,1,1,0,0,1,1,0,1,1,
+                     1,1,0,1,1,1,0,0,1,0,1,1,
+                     1,0,0,0,0,0,0,0,0,0,1,1,
+                     1,1,1,1,1,1,1,1,1,1,1,1,]
  
     def draw(self,display_surf,image_surf):
        bx = 0
@@ -52,8 +67,8 @@ class Maze:
  
 class App:
  
-    windowWidth = 800
-    windowHeight = 800
+    windowWidth = 684
+    windowHeight = 684
     player = 0
  
     def __init__(self):
@@ -94,7 +109,7 @@ class App:
             self._running = False
  
         # while( self._running ):
-            '''
+        '''
             pygame.event.pump()
             keys = pygame.key.get_pressed()
  
@@ -117,6 +132,8 @@ class App:
                 self._running = False'''
         while (self._running):
             for event in pygame.event.get():
+                if event.type == QUIT:
+                    self._running = False
                 if event.type == KEYDOWN:
                     if event.key == K_DOWN:
                         self.player.moveDown()
