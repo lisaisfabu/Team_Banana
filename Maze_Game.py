@@ -27,16 +27,16 @@ class Maze:
        
        self.maze = [ 1,1,1,1,1,1,1,1,1,1,1,1,
                      1,0,0,0,0,0,0,0,0,0,0,1,
-                     1,2,1,1,1,0,1,1,1,0,1,1,
+                     1,5,1,1,1,0,1,1,1,0,1,1,
                      1,0,1,0,0,0,0,0,1,0,1,1,
-                     1,0,1,0,1,0,0,0,0,1,0,1,
-                     1,0,0,0,1,0,1,0,0,0,0,1,
-                     1,0,1,1,1,0,1,0,0,1,1,1,
+                     1,0,1,0,1,0,0,0,0,1,0,0,
+                     1,0,0,0,1,0,1,0,0,0,0,0,
+                     1,0,1,0,1,0,1,0,0,1,1,1,
                      1,0,0,0,0,0,1,1,0,0,0,1,
-                     1,0,0,1,1,0,0,1,1,0,1,1,
-                     1,1,0,1,1,1,0,0,1,0,1,1,
+                     1,0,0,1,1,0,7,1,1,0,1,1,
+                     1,1,0,0,0,1,0,0,1,0,1,0,
                      1,0,0,1,0,0,0,0,0,0,0,1,
-                     1,1,1,1,1,1,1,1,1,1,0,0,]
+                     0,0,1,1,1,1,1,1,1,1,0,0,]
  
     def draw(self,display_surf):
        bx = 0
@@ -120,8 +120,7 @@ class App:
  
     def on_init(self):
         pygame.init()
-        self._display_surf = pygame.display.set_mode((self.windowWidth,self.windowHeight), pygame.HWSURFACE)
- 
+        self._display_surf = pygame.display.set_mode((self.windowWidth,self.windowHeight), pygame.HWSURFACE) 
         pygame.display.set_caption('Pygame pythonspot.com example')
         self._running = True
         self._image_surf = pygame.image.load("person.png").convert()
@@ -153,7 +152,8 @@ class App:
                     self._running = False
                 if event.type == KEYDOWN:
                     if event.key == K_DOWN:
-                        self.player.moveDown()
+                        if self.maze.maze[(self.player.y + self.player.speed)//57*10 + 1] != 1:
+                            self.player.moveDown()
                     if event.key == K_UP:
                         self.player.moveUp()
                     if event.key == K_LEFT:
