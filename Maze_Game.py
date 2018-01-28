@@ -1,6 +1,18 @@
 from pygame.locals import *
 import pygame
 
+'''
+matrixKeeper = []
+for i in range (12):
+    matrixKeeper.append([])
+
+num = 0
+for i in range (12):
+    for j in range (12):
+        matrixKeeper[i].append(num)
+        num += 1 '''
+
+
 class Player:
     x = 57
     y = 57
@@ -27,15 +39,15 @@ class Maze:
        
        self.maze = [ 1,1,1,1,1,1,1,1,1,1,1,1,
                      1,0,0,0,0,0,0,0,0,0,0,1,
-                     1,5,1,1,1,0,1,1,1,0,1,1,
-                     1,0,1,0,0,0,0,0,1,0,1,1,
-                     1,0,1,0,1,0,0,0,0,1,0,0,
-                     1,0,0,0,1,0,1,0,0,0,0,0,
-                     1,0,1,0,1,0,1,0,0,1,1,1,
-                     1,0,0,0,0,0,1,1,0,0,0,1,
-                     1,0,0,1,1,0,7,1,1,0,1,1,
-                     1,1,0,0,0,1,0,0,1,0,1,0,
-                     1,0,0,1,0,0,0,0,0,0,0,1,
+                     1,5,1,1,2,0,1,1,1,0,0,1,
+                     1,0,1,0,0,0,0,0,1,4,1,1,
+                     1,0,1,0,1,0,7,0,0,1,0,0,
+                     1,0,0,0,1,0,1,0,0,0,0,1,
+                     1,0,1,3,1,0,1,0,0,1,1,1,
+                     1,0,0,0,0,0,1,1,0,0,10,1,
+                     1,8,0,1,1,0,0,6,1,0,0,1,
+                     1,1,0,0,0,1,0,0,1,0,1,1,
+                     1,0,0,9,0,0,0,0,0,0,0,1,
                      0,0,1,1,1,1,1,1,1,1,0,0,]
  
     def draw(self,display_surf):
@@ -93,15 +105,6 @@ class Maze:
            if bx > self.M-1:
                bx = 0 
                by = by + 1
-        
-
-            
-
-'''
-    iron = {1: "grassF.png", 2: "tofu.png", 3: "thyme.png", 4: "tea.png",
-            5: "spinach.png", 6: "pistachios.png", 7: "eggs.png", 8: "dairy.png",
-            9: "coffee.png", 10: "coconutmilk.png", 11: "amaranth.png"}
-'''
  
  
 class App:
@@ -152,14 +155,20 @@ class App:
                     self._running = False
                 if event.type == KEYDOWN:
                     if event.key == K_DOWN:
-                        if self.maze.maze[(self.player.y + self.player.speed)//57*10 + 1] != 1:
-                            self.player.moveDown()
+                        self.player.moveDown()
+                            
                     if event.key == K_UP:
                         self.player.moveUp()
+
+                        
                     if event.key == K_LEFT:
                         self.player.moveLeft()
+
+                        
                     if event.key == K_RIGHT:
                         self.player.moveRight()
+
+                        
                     if event.key == K_ESCAPE:
                         self._running = False
      
@@ -170,4 +179,3 @@ class App:
 if __name__ == "__main__" :
     theApp = App()
     theApp.on_execute()
-
