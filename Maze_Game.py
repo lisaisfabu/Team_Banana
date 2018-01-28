@@ -1,17 +1,30 @@
 from pygame.locals import *
 import pygame
 
-'''
-matrixKeeper = []
-for i in range (12):
-    matrixKeeper.append([])
+def welcome():
+    pygame.init()
+    screen = pygame.display.set_mode((684, 684))
+    
+    # Fill background
+    screen.fill((250, 250, 250))
+    
+    # Display some text
+    font = pygame.font.Font(None, 36)
+    text = font.render("TheHealthyNut", 1, (10, 10, 10))
+    textpos = text.get_rect()
+    textpos.centerx = screen.get_rect().centerx
+    screen.blit(text, textpos)
 
-num = 0
-for i in range (12):
-    for j in range (12):
-        matrixKeeper[i].append(num)
-        num += 1 '''
-
+    while True:
+        for event in pygame.event.get():
+            if event.type == QUIT:
+                pygame.exit()
+            if event.type == KEYDOWN:
+                if event.key == K_ESCAPE:
+                    pygame.exit()
+                if event.key == K_SPACE:
+                    return
+        pygame.display.update()
 
 class Player:
     x = 57
@@ -180,5 +193,6 @@ class App:
         self.on_cleanup()
  
 if __name__ == "__main__" :
+    welcome()
     theApp = App()
     theApp.on_execute()
