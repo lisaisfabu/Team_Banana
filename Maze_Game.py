@@ -141,7 +141,7 @@ class App:
     def on_init(self):
         pygame.init()
         self._display_surf = pygame.display.set_mode((self.windowWidth,self.windowHeight), pygame.HWSURFACE) 
-        pygame.display.set_caption('Pygame pythonspot.com example')
+        pygame.display.set_caption('The Healthy Nut')
         self._running = True
         self._image_surf = pygame.image.load("person.png").convert()
         self._block_surf = pygame.image.load("grassF.png").convert()
