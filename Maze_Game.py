@@ -28,10 +28,11 @@ def welcome():
         #blinking image using timer
         image = pygame.image.load("healthynut.png")
         screen.blit(image,(0,0))
-        pygame.time.delay(200)
+        pygame.time.delay(300)
         pygame.display.flip()
         image = pygame.image.load("healthynut1.png")
         screen.blit(image,(0,0))
+        pygame.time.delay(300)
         pygame.display.flip()
         pygame.display.update()
 
@@ -155,7 +156,7 @@ class App:
         self._display_surf = pygame.display.set_mode((self.windowWidth,self.windowHeight), pygame.HWSURFACE) 
         pygame.display.set_caption('The Healthy Nut')
         self._running = True
-        self._image_surf = pygame.image.load("person.png").convert()
+        self._image_surf = pygame.image.load("person1.png").convert()
         self._block_surf = pygame.image.load("grassF.png").convert()
  
     def on_event(self, event):
