@@ -158,23 +158,27 @@ class App:
         self._running = True
         self._image_surf = pygame.image.load("person1.png").convert()
         self._block_surf = pygame.image.load("grassF.png").convert()
- 
+
+    #When you quit playing
     def on_event(self, event):
         if event.type == QUIT:
             self._running = False
  
     def on_loop(self):
         pass
- 
+
+    #It renders the white background, the walls, the items, and the player
     def on_render(self):
         self._display_surf.fill((255,255,255))
         self._display_surf.blit(self._image_surf,(self.player.x,self.player.y))
         self.maze.draw(self._display_surf)
         pygame.display.flip()
- 
+
+    #exits the game
     def on_cleanup(self):
         pygame.quit()
- 
+
+    #Game start
     def on_execute(self):
         if self.on_init() == False:
             self._running = False
