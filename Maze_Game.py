@@ -23,22 +23,6 @@ class Maze:
        self.M = 12
        self.N = 12
        
-       '''
-       self.maze = [ 1,1,1,1,1,1,1,1,1,1,1,1,1,1,
-                     1,0,0,0,0,0,0,0,0,0,1,1,0,1,
-                     1,0,1,1,1,0,1,1,1,0,1,0,0,1,
-                     1,0,1,0,0,0,0,0,0,0,0,0,1,1,
-                     1,0,1,0,0,0,0,0,0,0,1,0,0,1,
-                     1,0,0,0,0,0,0,0,0,1,1,0,1,1,
-                     1,0,1,1,1,0,1,1,0,0,1,1,1,1,
-                     1,0,0,0,0,0,1,1,1,0,0,0,0,1,
-                     1,0,0,1,1,0,0,1,1,0,1,0,0,1,
-                     1,1,0,1,1,1,0,0,1,0,1,0,1,1,
-                     1,0,0,0,0,0,0,0,0,0,1,0,0,1,
-                     1,0,1,0,1,1,1,1,0,1,1,0,1,1,
-                     1,0,0,0,0,1,1,0,0,1,0,0,0,0,
-                     1,1,1,1,1,1,1,0,1,1,1,1,1,1,]
-                     '''
        self.maze = [ 1,1,1,1,1,1,1,1,1,1,1,1,
                      1,0,0,0,0,0,0,0,0,0,0,1,
                      1,0,1,1,1,0,1,1,1,0,1,1,
@@ -108,35 +92,15 @@ class App:
         if self.on_init() == False:
             self._running = False
  
-        # while( self._running ):
-        '''
-            pygame.event.pump()
-            keys = pygame.key.get_pressed()
- 
-            if (keys[K_RIGHT]):
-                self.player.moveRight()
- 
-            if (keys[K_LEFT]):
-                self.player.moveLeft()
- 
-            if (keys[K_UP]):
-                self.player.moveUp()
- 
-            if (keys[K_DOWN]):
-                self.player.moveDown()
 
-            if (keys[QUIT]):
-                self._running = False
- 
-            if (keys[K_ESCAPE]):
-                self._running = False'''
         while (self._running):
             for event in pygame.event.get():
                 if event.type == QUIT:
                     self._running = False
                 if event.type == KEYDOWN:
                     if event.key == K_DOWN:
-                        self.player.moveDown()
+                        if self.maze.maze[(self.player.y + self.player.speed)//57*10+1] != 1:
+                            self.player.moveDown()
                     if event.key == K_UP:
                         self.player.moveUp()
                     if event.key == K_LEFT:
