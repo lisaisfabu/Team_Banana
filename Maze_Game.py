@@ -13,15 +13,16 @@ def welcome():
     text = font.render("TheHealthyNut", 1, (10, 10, 10))
     textpos = text.get_rect()
     textpos.centerx = screen.get_rect().centerx
-    screen.blit(text, textpos)
+    image = pygame.image.load("healthynut.png")
+    screen.blit(image,(0,0))
 
     while True:
         for event in pygame.event.get():
             if event.type == QUIT:
-                pygame.exit()
+                pygame.quit()
             if event.type == KEYDOWN:
                 if event.key == K_ESCAPE:
-                    pygame.exit()
+                    pygame.quit()
                 if event.key == K_SPACE:
                     return
         pygame.display.update()
