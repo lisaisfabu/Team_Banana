@@ -1,11 +1,13 @@
+# Team Banana 
+
 from pygame.locals import *
 import pygame
 
+# Welcome page for the player!
 def welcome():
     pygame.init()
     screen = pygame.display.set_mode((684, 684))
 
-    #welcome page
     # Fill background
     screen.fill((250, 250, 250))
     
@@ -15,7 +17,7 @@ def welcome():
     textpos = text.get_rect()
     textpos.centerx = screen.get_rect().centerx
 
-    #welcome screen controls
+    # Updating our page 
     while True:
         for event in pygame.event.get():
             if event.type == QUIT:
@@ -25,7 +27,8 @@ def welcome():
                     pygame.quit()
                 if event.key == K_SPACE:
                     return
-        #blinking image using timer
+                
+        # Blinking image using timer
         image = pygame.image.load("healthynut.png")
         screen.blit(image,(0,0))
         pygame.time.delay(300)
@@ -36,10 +39,13 @@ def welcome():
         pygame.display.flip()
         pygame.display.update()
 
-#the player that you move around
+# The player that you move around
 class Player:
+    # Initial position at the start
     x = 57
     y = 57
+
+    # Change in movement 
     speed = 57
  
     def moveRight(self):
@@ -54,15 +60,15 @@ class Player:
     def moveDown(self):
         self.y = self.y + self.speed
 
-#the actual maze
+# Maze class responsible for filling and updating
+# the maze 
 class Maze:
 
-    #size of array 12 by 12
     def __init__(self):
        self.M = 12
        self.N = 12
        
-       #one dimensional array maze
+       # One-dimensional array storing a 2-D maze
        self.maze = [ 1,1,1,1,1,1,1,1,1,1,1,1,
                      1,0,0,0,0,0,0,0,0,0,3,1,
                      1,5,1,1,2,0,1,1,1,0,0,1,
@@ -76,13 +82,14 @@ class Maze:
                      1,0,0,9,0,0,5,0,0,0,0,1,
                      12,0,1,1,1,1,1,1,1,1,0,12,]
 
-     #draws the maze and items in the maze
-    def draw(self,display_surf):
+
+    # Draws the maze and items in the maze
+    def draw(self, display_surf): 
        bx = 0
        by = 0
+       
        for i in range(0,self.M*self.N):
-           # image = pygame.image.load(self.iron.get(self.maze[ bx + (by*self.M)])).convert()
-            
+           
            if self.maze[bx + (by*self.M)] == 1:
                image = pygame.image.load("grassF.png").convert()
                display_surf.blit(image, (bx*57, by*57))
@@ -136,13 +143,14 @@ class Maze:
                bx = 0 
                by = by + 1
  
-#the application
 class App:
  
     windowWidth = 684
     windowHeight = 684
-    player = 0
+    player = None
 
+    
+    # Initialize needed variables later used in updating the game 
     def __init__(self):
         self._running = True
         self._display_surf = None
@@ -154,12 +162,12 @@ class App:
     def on_init(self):
         pygame.init()
         self._display_surf = pygame.display.set_mode((self.windowWidth,self.windowHeight), pygame.HWSURFACE) 
-        pygame.display.set_caption('The Healthy Nut')
+        pygame.display.set_caption('Know your iron!')
         self._running = True
         self._image_surf = pygame.image.load("person1.png").convert()
-        self._block_surf = pygame.image.load("grassF.png").convert()
 
-    #When you quit playing
+
+    # Exit game by the red x on the top right corner
     def on_event(self, event):
         if event.type == QUIT:
             self._running = False
